@@ -1,38 +1,28 @@
 #include <zore/core/Application.hpp>
 #include <zore/devices/Window.hpp>
 #include <zore/graphics/RenderEngine.hpp>
-#include <zore/ui/EditorUI.hpp>
+#include <zore/ui/Editor.hpp>
+#include <zore/ui/Console.hpp>
 
-#include <zore/debug/Debug.hpp>
-#include <zore/utils/Timer.hpp>
+#include <zore/Debug.hpp>
+#include <zore/utils/Time.hpp>
 
 namespace zore {
 
 	class DemoApplication : public Application {
 	public:
-		DemoApplication() {
-			EditorUI::Init(false);
+		DemoApplication(LaunchOptions options) : Application(options) {
 			RenderEngine::SetVSync(false);
 		}
 
 		void Run() {
 			RenderEngine::SetClearColour(1.0, 0.0, 0.0, 1.0);
 
-			Timer t;
-			int frame_count = 0;
-
 			while (!Window::ShouldClose()) {
 				RenderEngine::Clear();
-
-				if (t.DeltaTime(false) > 1.f) {
-					Logger::Log(frame_count);
-					frame_count = 0;
-				}
-				frame_count++;
-
-				EditorUI::BeginFrame();
-				EditorUI::ShowDemoWindow();
-				EditorUI::EndFrame();
+				Editor::BeginFrame();
+				Console::Draw();
+				Editor::EndFrame();
 				Window::Update();
 			}
 		}
@@ -42,6 +32,8 @@ namespace zore {
 	};
 
 	Application* Application::Create() {
-		return new DemoApplication;
+		return new DemoApplication({
+			.enable_audio = false
+			});
 	}
 }

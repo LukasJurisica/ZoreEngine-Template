@@ -1,5 +1,5 @@
 # Define required cmake and c++ versions
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ standard version")
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 

@@ -8,5 +8,5 @@ include(CPM)
 CPMAddPackage(
     NAME ZoreEngine
     GITHUB_REPOSITORY LukasJurisica/ZoreEngine
-    GIT_TAG aaae702
+    GIT_TAG 8543720
 )
